@@ -1,10 +1,10 @@
 apiVersion: v1
-kind: pod
+kind: Pod
 metadata:
   name: image-pull-sample
-    spec:
-      containers:
-        - name: neo4j-server
-        image:
-          imagePullPolicy: Always
-          command: ["echo", "SUCCESS"]
+spec:
+  containers:
+     - name: neo4j-server
+       image: neo4j
+       imagePullPolicy: Always
+       command: ['echo', 'SUCCESS']
