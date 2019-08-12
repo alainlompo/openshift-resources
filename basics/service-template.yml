@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service_sample
+spec:
+  ports:
+  - port: 8080
+    targetPort: 31999
