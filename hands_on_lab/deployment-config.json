@@ -1,0 +1,109 @@
+{
+  "kind": "DeploymentConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mlbparks",
+    "labels": {
+      "deploymentConfig": "mlbparks",
+      "application": "mlbparks",
+      "category": "hands-on-lab"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "deploymentConfig": "mlbparks"
+    },
+    "strategy": {
+      "type": "Recreate"
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "deploymentConfig": "mlbparks",
+          "application": "mlbparks",
+          "category": "hands-on-lab"
+        },
+        "name": "mlbparks"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "mlbparks",
+            "image": "mlbparks",
+            "imagePullPolicy": "Always",
+            "env": [
+              {
+                "name": "OS_DNS_PING_SERVICE_NAME",
+                "value": "mlbparks-ping"
+              },
+              {
+                "name": "OS_DNS_PING_SERVICE_PORT",
+                "value": "8888"
+              },
+              {
+                "name": "MONGODB_USER",
+                "value": "user"
+              },
+              {
+                "name": "MONGODB_PASSWORD",
+                "value": "password"
+              },
+              {
+                "name": "MONGODB_DATABASE",
+                "value": "database"
+              }
+            ],
+            "ports": [
+              {
+                "name": "mlbparks-http",
+                "containerPort": 8080,
+                "protocol": "TCP"
+              },
+              {
+                "name": "mlbparks-ping",
+                "containerPort": 8888,
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "exec": {
+                "command": [
+                  "/bin/bash",
+                  "-c",
+                  "/opt/eap/bin/readinessProbe.sh"
+                ]
+              }
+            },
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "securityContext": {
+              "capabilities": {},
+              "privileged": false
+            }
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst"
+      }
+    },
+    "triggers": [
+      {
+        "type": "ImageChange",
+        "imageChangeParams": {
+          "automatic": true,
+          "containerNames": [
+            "mlbparks"
+          ],
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "mlbparks:latest"
+          }
+        }
+      },
+      {
+        "type": "ConfigChange"
+      }
+    ]
+  }
+}
