@@ -1,0 +1,21 @@
+{
+  "kind": "Route",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mlbparks-http-route",
+    "labels": {
+      "application": "mlbparks",
+      "category": "hands-on-lab"
+    },
+    "annotations": {
+      "description": "Route for application's http service"
+    }
+  },
+  "spec": {
+    "host": "mlbparks.cloudapps.example.com",
+    "to": {
+      "kind": "Service",
+      "name": "mlbparks-http"
+    }
+  }
+}
