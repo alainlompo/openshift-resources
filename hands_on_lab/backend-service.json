@@ -1,0 +1,22 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mongodb",
+    "labels": {
+      "application": "mlbparks",
+      "category": "hands-on-lab"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "port": 27017,
+        "targetPort": 27017
+      }
+    ],
+    "selector": {
+      "deploymentConfig": "mlbparks-mongodb"
+    }
+  }
+}

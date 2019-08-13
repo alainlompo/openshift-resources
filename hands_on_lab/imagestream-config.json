@@ -1,0 +1,19 @@
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mlbparks",
+    "labels": {
+      "application": "mlbparks",
+      "category": "hands-on-lab"
+    }
+  },
+  "spec": {
+    "dockerImageRepository": "",
+    "tags": [
+      {
+        "name": "latest"
+      }
+    ]
+  }
+}

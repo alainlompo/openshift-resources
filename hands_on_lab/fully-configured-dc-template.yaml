@@ -1,0 +1,108 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: '2019-08-13T04:57:49Z'
+  generation: 2
+  labels:
+    application: mlbparks
+    createdBy: template-mlbparks-wildfly
+    deploymentConfig: mlbparks
+    template.openshift.io/template-instance-owner: e61d9236-bd86-11e9-8e73-96000028a1b2
+  name: mlbparks
+  namespace: os-basics
+  resourceVersion: '8936157'
+  selfLink: /apis/apps.openshift.io/v1/namespaces/os-basics/deploymentconfigs/mlbparks
+  uid: e62c445c-bd86-11e9-8e73-96000028a1b2
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    deploymentConfig: mlbparks
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deploymentConfig: mlbparks
+    spec:
+      containers:
+        - env:
+            - name: MONGODB_USER
+              value: your-db-user-name
+            - name: MONGODB_PASSWORD
+              value: your-db-user-password
+            - name: MONGODB_DATABASE
+              value: your-db-name
+            - name: MONGODB_ADMIN_PASSWORD
+              value: your-db-admin-password
+          image: >-
+            docker-registry.default.svc:5000/os-basics/mlbparks@sha256:d81ce1a66a6b7f90181eba8650cdf7d9479a0c95a7cf73484dcc099d1984efa5
+          imagePullPolicy: Always
+          name: mlbparks
+          ports:
+            - containerPort: 8080
+              name: mlbparks-http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - mlbparks
+        from:
+          kind: ImageStreamTag
+          name: 'mlbparks:latest'
+          namespace: os-basics
+        lastTriggeredImage: >-
+          docker-registry.default.svc:5000/os-basics/mlbparks@sha256:d81ce1a66a6b7f90181eba8650cdf7d9479a0c95a7cf73484dcc099d1984efa5
+      type: ImageChange
+    - type: ConfigChange
+status:
+  availableReplicas: 1
+  conditions:
+    - lastTransitionTime: '2019-08-13T04:59:33Z'
+      lastUpdateTime: '2019-08-13T04:59:33Z'
+      message: Deployment config has minimum availability.
+      status: 'True'
+      type: Available
+    - lastTransitionTime: '2019-08-13T04:59:34Z'
+      lastUpdateTime: '2019-08-13T04:59:34Z'
+      message: replication controller "mlbparks-1" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: 'True'
+      type: Progressing
+  details:
+    causes:
+      - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1
