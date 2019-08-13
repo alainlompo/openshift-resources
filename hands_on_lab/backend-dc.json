@@ -4,7 +4,8 @@
   "metadata": {
     "name": "mlbparks-mongodb",
     "labels": {
-      "application": "mlbparks"
+      "application": "mlbparks",
+      "category": "hands-on-lab"
     }
   },
   "spec": {
@@ -19,7 +20,8 @@
       "metadata": {
         "labels": {
           "deploymentConfig": "mlbparks-mongodb",
-          "application": "mlbparks"
+          "application": "mlbparks",
+          "category": "hands-on-lab"
         },
         "name": "mlbparks-mongodb"
       },
