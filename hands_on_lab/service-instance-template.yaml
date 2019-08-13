@@ -1,0 +1,72 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  creationTimestamp: '2019-08-13T04:57:42Z'
+  finalizers:
+    - kubernetes-incubator/service-catalog
+  generateName: mlbparks-wildfly-
+  generation: 1
+  name: mlbparks-wildfly-p6rkr
+  namespace: os-basics
+  resourceVersion: '8935865'
+  selfLink: >-
+    /apis/servicecatalog.k8s.io/v1beta1/namespaces/os-basics/serviceinstances/mlbparks-wildfly-p6rkr
+  uid: e1a1a152-bd86-11e9-965d-0a580a8000de
+spec:
+  clusterServiceClassExternalName: mlbparks-wildfly
+  clusterServiceClassRef:
+    name: 34321435-92eb-11e9-bdfa-96000028a1b2
+  clusterServicePlanExternalName: default
+  clusterServicePlanRef:
+    name: 34321435-92eb-11e9-bdfa-96000028a1b2
+  externalID: e1a1a087-bd86-11e9-965d-0a580a8000de
+  parametersFrom:
+    - secretKeyRef:
+        key: parameters
+        name: mlbparks-wildfly-parametersgsphn
+  updateRequests: 0
+  userInfo:
+    extra:
+      scopes.authorization.openshift.io:
+        - 'user:full'
+    groups:
+      - 'system:authenticated:oauth'
+      - 'system:authenticated'
+    uid: ''
+    username: root
+status:
+  asyncOpInProgress: false
+  conditions:
+    - lastTransitionTime: '2019-08-13T04:57:50Z'
+      message: The instance was provisioned successfully
+      reason: ProvisionedSuccessfully
+      status: 'True'
+      type: Ready
+  deprovisionStatus: Required
+  externalProperties:
+    clusterServicePlanExternalID: 34321435-92eb-11e9-bdfa-96000028a1b2
+    clusterServicePlanExternalName: default
+    parameterChecksum: a5d78307df2e12458e317ea5e26e472b7d53070a135fb1f894aa630e800489be
+    parameters:
+      APPLICATION_NAME: <redacted>
+      GENERIC_TRIGGER_SECRET: <redacted>
+      GITHUB_TRIGGER_SECRET: <redacted>
+      GIT_REF: <redacted>
+      GIT_URI: <redacted>
+      MONGODB_ADMIN_PASSWORD: <redacted>
+      MONGODB_DATABASE: <redacted>
+      MONGODB_PASSWORD: <redacted>
+      MONGODB_USER: <redacted>
+    userInfo:
+      extra:
+        scopes.authorization.openshift.io:
+          - 'user:full'
+      groups:
+        - 'system:authenticated:oauth'
+        - 'system:authenticated'
+      uid: ''
+      username: root
+  observedGeneration: 1
+  orphanMitigationInProgress: false
+  provisionStatus: Provisioned
+  reconciledGeneration: 1

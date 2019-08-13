@@ -1,0 +1,32 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    description: Route for application's http service
+    openshift.io/host.generated: 'true'
+  creationTimestamp: '2019-08-13T04:57:49Z'
+  labels:
+    application: mlbparks
+    createdBy: template-mlbparks-wildfly
+    template.openshift.io/template-instance-owner: e61d9236-bd86-11e9-8e73-96000028a1b2
+  name: mlbparks
+  namespace: os-basics
+  resourceVersion: '8935853'
+  selfLink: /apis/route.openshift.io/v1/namespaces/os-basics/routes/mlbparks
+  uid: e62e9670-bd86-11e9-8e73-96000028a1b2
+spec:
+  host: mlbparks-os-basics.apps.116.203.178.141.nip.io
+  to:
+    kind: Service
+    name: mlbparks
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+    - conditions:
+        - lastTransitionTime: '2019-08-13T04:57:49Z'
+          status: 'True'
+          type: Admitted
+      host: mlbparks-os-basics.apps.116.203.178.141.nip.io
+      routerName: router
+      wildcardPolicy: None

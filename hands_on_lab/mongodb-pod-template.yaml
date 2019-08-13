@@ -1,0 +1,124 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    openshift.io/deployment-config.latest-version: '1'
+    openshift.io/deployment-config.name: mlbparks-mongodb
+    openshift.io/deployment.name: mlbparks-mongodb-1
+    openshift.io/scc: restricted
+  creationTimestamp: '2019-08-13T04:57:52Z'
+  generateName: mlbparks-mongodb-1-
+  labels:
+    deployment: mlbparks-mongodb-1
+    deploymentConfig: mlbparks-mongodb
+    deploymentconfig: mlbparks-mongodb
+  name: mlbparks-mongodb-1-zc67b
+  namespace: os-basics
+  ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicationController
+      name: mlbparks-mongodb-1
+      uid: e65ab5d7-bd86-11e9-8e73-96000028a1b2
+  resourceVersion: '8935901'
+  selfLink: /api/v1/namespaces/os-basics/pods/mlbparks-mongodb-1-zc67b
+  uid: e7dcc291-bd86-11e9-8e73-96000028a1b2
+spec:
+  containers:
+    - env:
+        - name: MONGODB_USER
+          value: your-db-user-name
+        - name: MONGODB_PASSWORD
+          value: your-db-user-password
+        - name: MONGODB_DATABASE
+          value: your-db-name
+        - name: MONGODB_ADMIN_PASSWORD
+          value: your-db-admin-password
+        - name: MONGODB_NOPREALLOC
+        - name: MONGODB_SMALLFILES
+        - name: MONGODB_QUIET
+      image: >-
+        docker-registry.default.svc:5000/openshift/mongodb@sha256:60a97b31cf67e651fe98bed69ed86d56e3175a125488b978f681930940bb98ce
+      imagePullPolicy: IfNotPresent
+      name: mlbparks-mongodb
+      ports:
+        - containerPort: 27017
+          protocol: TCP
+      resources: {}
+      securityContext:
+        capabilities:
+          drop:
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+        privileged: false
+        runAsUser: 1000480000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /var/lib/mongodb/data
+          name: mlbparks-mongodb-data
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: default-token-c6vzm
+          readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:
+    - name: default-dockercfg-4bc4h
+  nodeName: mycentos-16gb-nbg1-1
+  nodeSelector:
+    node-role.kubernetes.io/compute: 'true'
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000480000
+    seLinuxOptions:
+      level: 's0:c22,c9'
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  volumes:
+    - emptyDir: {}
+      name: mlbparks-mongodb-data
+    - name: default-token-c6vzm
+      secret:
+        defaultMode: 420
+        secretName: default-token-c6vzm
+status:
+  conditions:
+    - lastProbeTime: null
+      lastTransitionTime: '2019-08-13T04:57:52Z'
+      status: 'True'
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: '2019-08-13T04:57:55Z'
+      status: 'True'
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: null
+      status: 'True'
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: '2019-08-13T04:57:52Z'
+      status: 'True'
+      type: PodScheduled
+  containerStatuses:
+    - containerID: >-
+        docker://86e9f8dd487c687ee8ead742ed71580bbe5a0e600f2ff432a45cae823530bf7f
+      image: 'sha256:ed70d495373b22cd53219e58ba3f48bef92ef62a8ce8627b1a8684c3622cd1b4'
+      imageID: >-
+        docker-pullable://docker-registry.default.svc:5000/openshift/mongodb@sha256:60a97b31cf67e651fe98bed69ed86d56e3175a125488b978f681930940bb98ce
+      lastState: {}
+      name: mlbparks-mongodb
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: '2019-08-13T04:57:54Z'
+  hostIP: 116.203.178.141
+  phase: Running
+  podIP: 10.128.0.252
+  qosClass: BestEffort
+  startTime: '2019-08-13T04:57:52Z'
