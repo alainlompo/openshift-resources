@@ -7,4 +7,3 @@ spec:
      - name: neo4j-server
        image: neo4j
        imagePullPolicy: Always
-       command: ['echo', 'SUCCESS']
