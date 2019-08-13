@@ -23,7 +23,7 @@
         "from": {
           "kind": "ImageStreamTag",
           "namespace": "openshift",
-          "name": "jboss-eap6-openshift:6.4"
+          "name": "wildfly:latest"
         }
       }
     },
