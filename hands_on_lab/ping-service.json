@@ -1,0 +1,25 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mlbparks-ping",
+    "labels": {
+      "application": "mlbparks",
+      "category": "hands-on-lab"
+    },
+    "annotations": {
+      "description": "Ping service for clustered applications"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "port": 8888,
+        "targetPort": 8888
+      }
+    ],
+    "selector": {
+      "deploymentConfig": "mlbparks"
+    }
+  }
+}
