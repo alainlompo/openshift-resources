@@ -1,0 +1,96 @@
+{
+  "kind": "DeploymentConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "mlbparks-mongodb",
+    "labels": {
+      "application": "mlbparks"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "deploymentConfig": "mlbparks-mongodb"
+    },
+    "strategy": {
+      "type": "Recreate"
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "deploymentConfig": "mlbparks-mongodb",
+          "application": "mlbparks"
+        },
+        "name": "mlbparks-mongodb"
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "mlbparks-mongodb",
+            "image": "mongodb",
+            "imagePullPolicy": "IfNotPresent",
+            "env": [
+              {
+                "name": "MONGODB_USER",
+                "value": "user"
+              },
+              {
+                "name": "MONGODB_PASSWORD",
+                "value": "password"
+              },
+              {
+                "name": "MONGODB_DATABASE",
+                "value": "database"
+              }
+            ],
+            "ports":  [
+              {
+                "containerPort": 27017,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {},
+            "volumeMounts": [
+              {
+                "name": "mlbparks-mongodb-data",
+                "mountPath": "/var/lib/mongodb/data"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "securityContext": {
+              "capabilities": {},
+              "privileged": false
+            }
+          }
+        ],
+        "volumes": [
+          {
+            "name": "mlbparks-mongodb-data",
+            "emptyDir": {}
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst"
+      }
+    },
+    "triggers": [
+      {
+        "type": "ImageChange",
+        "imageChangeParams": {
+          "automatic": true,
+          "containerNames": [
+            "mlbparks-mongodb"
+          ],
+          "from": {
+            "kind": "ImageStreamTag",
+            "namespace": "openshift",
+            "name": "mongodb:latest"
+          }
+        }
+      },
+      {
+        "type": "ConfigChange"
+      }
+    ]
+  }
+}
