@@ -5,6 +5,7 @@ metadata:
   labels:
     component: elasticsearch
     role: master
+allowPrivilegedContainer: true
 spec:
   replicas: 1
   template:
