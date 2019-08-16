@@ -50,8 +50,6 @@ spec:
         - name: storage
           mountPath: /data
       volumes:
-          - emptyDir:
-              medium: ""
-            name: "storage"
-            persistentVolumeClaim:
-              claimName: data-node-pvc
+        - name: storage
+          persistentVolumeClaim:
+            claimName: data-node-pvc
