@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-node-pvc
+  labels:
+    component: elasticsearch
+    target: master
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 6Gi
+    selector:
+      matchLabels:
+        component: elasticsearch
