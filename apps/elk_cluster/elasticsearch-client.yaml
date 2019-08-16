@@ -48,9 +48,9 @@ spec:
           name: transport
           protocol: TCP
         volumeMounts:
-        - name: storage
+        - name: storage-client
           mountPath: /data
       volumes:
           - emptyDir:
               medium: ""
-            name: "storage"
+            name: storage-client
