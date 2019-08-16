@@ -21,7 +21,7 @@ spec:
             add:
               - IPC_LOCK
               - SYS_RESOURCE
-        image: "docker.elastic.co/elasticsearch/elasticsearch:7.3.0"
+        image: "docker.elastic.co/elasticsearch/elasticsearch:6.8.2"
         imagePullPolicy: IfNotPresent
         env:
         - name: NAMESPACE
