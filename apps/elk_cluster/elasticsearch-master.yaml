@@ -53,3 +53,5 @@ spec:
           - emptyDir:
               medium: ""
             name: "storage"
+            persistentVolumeClaim:
+              claimName: data-node-pvc
